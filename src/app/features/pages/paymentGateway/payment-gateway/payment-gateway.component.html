@@ -1,0 +1,40 @@
+<section class="w-[90%] mx-auto min-h-[100vh] flex items-center justify-center">
+    <div class="w-2/3">
+        <header>
+            <h2 class="text-center mb-10">
+                <span class="bg-green-500 text-3xl text-white p-2 rounded-full ">Payment Details</span>
+            </h2>
+        </header>
+        <form [formGroup]="submitForm" (ngSubmit)="onSubmitForm(selectedMethod)">
+            <div class=" mb-4">
+                <label for="city" class="leading-7 text-sm text-gray-600">city</label>
+                <input type="text" id="city" name="city" formControlName="city"
+                    class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+
+            <div class=" mb-4">
+                <label for="phone" class="leading-7 text-sm text-gray-600">phone</label>
+                <input type="tel" id="phone" name="phone" formControlName="phone"
+                    class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+            </div>
+
+            <div class=" mb-4">
+                <label for="details" class="leading-7 text-sm text-gray-600">details</label>
+                <textarea id="details" name="details" formControlName="details"
+                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"></textarea>
+            </div>
+
+            <div class="flex justify-center space-x-2">
+                <button (click)="selectedMethod = 'cash'"
+                    class=" text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+                    cash Payment <i class="fas fa-cash-register"></i>
+                </button>
+
+                <button (click)="selectedMethod = 'online'"
+                    class=" text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+                    online Payment <i class="fas fa-credit-card"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>

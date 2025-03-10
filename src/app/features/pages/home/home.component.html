@@ -1,0 +1,54 @@
+@if (isLoading == false) {
+<div class="w-[50%] mx-auto mt-7">
+    <input [(ngModel)]="searchValue" type="text" class="w-full rounded-md border" placeholder="enter product name ...
+        ">
+</div>
+<div class="mt-5">
+    <app-category-slider></app-category-slider>
+</div>
+<div class="w-[90%] mx-auto mt-10">
+
+    <div class="grid md:grid-cols-2 xl:grid-cols-4">
+
+        @for (product of productList | filter : searchValue ; track $index) {
+        <div class="p-4 mb-3">
+            <div
+                class="group hover:shadow-xl h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                <div [routerLink]="['/productDetails', product._id]">
+                    <div class="w-[100%] mx-auto">
+                        <img class="h-[200px] mx-auto" [src]="product.imageCover" [alt]="product.title">
+                    </div>
+                    <div class="p-6">
+                        <h1 class="tracking-widest text-xs title-font font-semibold mb-1 text-green-400">
+                            {{product.brand.name}}</h1>
+                        <h2 class="title-font text-lg font-medium text-slate-400 mb-3">{{product.title.split('
+                            ').splice(0,2).join(' ')}}</h2>
+                        <p class="leading-relaxed mb-3">{{product.description.split(' ').splice(0,1).join(' ')}}</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <i class="fa fa-star text-yellow-300"></i>
+                                <span class="me-3">{{product.ratingsQuantity}}</span>
+                                <span class="text-slate-500">({{product.quantity}})</span>
+                            </div>
+                            <div>
+                                <span>{{product.price | currency:'EGP ' }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button (click)="addToCart(product._id)"
+                        class="group-hover:translate-y-[0] duration-300 block xl:translate-y-[300%] w-full text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
+                        Add To Cart
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        }
+    </div>
+</div>
+} @else {
+<app-loading-data></app-loading-data>
+}

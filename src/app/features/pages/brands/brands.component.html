@@ -1,0 +1,57 @@
+@if (isLoading == false) {
+<div class="w-[80%] mx-auto text-center">
+    <h1 class="text-green-600 font-semibold text-4xl mt-8">All Brands</h1>
+    <div class="flex justify-between flex-wrap">
+        @for (brand of brandList; track $index) {
+        <div class="h-full border-2 border-gray-200 border-opacity-60 rounded my-10">
+            <!-- Modal toggle -->
+            <button (click)="getCardData(brand)"
+                class="block hover:shadow-2xl focus:outline-none font-medium rounded-lg text-sm py-2.5 text-center"
+                type="button">
+                <img [src]="brand.image" [alt]="brand.name">
+                <p class="pb-5">{{ brand.name }}</p>
+            </button>
+        </div>
+        }
+    </div>
+
+
+    <!-- Dynamic Modal -->
+    @if (selectedBrand !== null) {
+
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="relative p-4 w-full max-w-2xl bg-white rounded-lg shadow-sm">
+            <!-- Modal Header -->
+            <div class="ms-[90%] p-2 border-b border-gray-200">
+                <button (click)="closeModal()"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8">
+                    ✖
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-5 flex justify-between items-center">
+                <div>
+                    <p class="text-2xl font-bold text-green-500">{{ selectedBrand.name }}</p>
+                    <p>{{ selectedBrand.slug }}</p>
+                </div>
+                <div>
+                    <img [src]="selectedBrand.image" [alt]="selectedBrand.name">
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-gray-200 flex justify-end">
+                <button (click)="closeModal()"
+                    class="py-2.5 px-5 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-800">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+}@else{
+<app-loading-data></app-loading-data>
+}
